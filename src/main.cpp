@@ -34,7 +34,7 @@ void client(Bank& bank, const int clientId, const int iterations)
         const int amount = amountDist(gen);
         const int action = actionDist(gen);
 
-        BankAccount *account;
+        BankAccount* account;
 
         {
             std::lock_guard<std::mutex> lock(mtx);
@@ -45,37 +45,37 @@ void client(Bank& bank, const int clientId, const int iterations)
 
         {
             std::lock_guard<std::mutex> lock(printMtx);
-                try
+            try
+            {
+                switch (action)
                 {
-                    switch (action)
-                    {
-                    case 1:
-                            std::cout << "Customer" << clientid << " Account " << accountNumber
-                                << " Deposit: " << amount << "\n";
-                            account->deposit(amount);
+                case 1:
+                    std::cout << "Customer" << clientId << " Account " << accountNumber
+                        << " Deposit: " << amount << "\n";
+                    account->deposit(amount);
 
-                            logger.logInfo(account->getId(), timestamp, account->getBalance(), amount); // Log for depositing
-                        break;
-                    case 2:
-                            std::cout << "Customer" << clientid << " Account " << accountNumber
-                                << " Withdraw: " << amount << "\n";;
+                    logger.logInfo(account->getId(), timestamp, account->getBalance(), amount); // Log for depositing
+                    break;
+                case 2:
+                    std::cout << "Customer" << clientId << " Account " << accountNumber
+                        << " Withdraw: " << amount << "\n";;
 
-                            account->withdraw(amount);
+                    account->withdraw(amount);
 
-                            logger.logInfo(account->getId(), timestamp, account->getBalance(), -amount); // Log for withdrawing
-                        break;
-                    case 3:
-                        std::cout << "Customer" << clientid << " Account " << accountNumber
-                            << " Balance: " << account->getBalance() << "\n";
-                        break;
-                    default:
-                        break;
-                    }
+                    logger.logInfo(account->getId(), timestamp, account->getBalance(), -amount); // Log for withdrawing
+                    break;
+                case 3:
+                    std::cout << "Customer" << clientId << " Account " << accountNumber
+                        << " Balance: " << account->getBalance() << "\n";
+                    break;
+                default:
+                    break;
                 }
-                catch (const std::exception& e)
-                {
-                    std::cerr << "Error: " << e.what() << "\n";
-                }
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "Error: " << e.what() << "\n";
+            }
         }
         std::uniform_int_distribution waitTime(100, 3000);
         std::this_thread::sleep_for(std::chrono::milliseconds(waitTime(gen)));
