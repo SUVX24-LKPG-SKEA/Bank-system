@@ -6,7 +6,7 @@
 #include <condition_variable>
 #include <fstream>
 #include <map>
-#include "bankAccount.h"
+#include "BankAccount.h"
 
 /**
  * @brief Singleton to handle logging

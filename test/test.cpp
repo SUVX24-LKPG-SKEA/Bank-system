@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "bankAccount.h"
+#include "BankAccount.h"
 #include "Bank.hpp" // Will be renamed
 
 TEST_CASE("BankAccount class", "[bankaccount],[class]")

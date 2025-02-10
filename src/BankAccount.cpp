@@ -1,4 +1,4 @@
-#include "bankAccount.h"
+#include "BankAccount.h"
 #include <iostream>
 
 bankAccount::bankAccount(int balance, int accountNumber)
@@ -55,16 +55,19 @@ int bankAccount::getBalance()
     return balance;
 }
 
-int bankAccount::getWithdraws() {
+int bankAccount::getWithdraws() 
+{
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return withdraws;
 }
 
-int bankAccount::getDeposits() {
+int bankAccount::getDeposits() 
+{
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return deposits;
 }
 
-int bankAccount::getId() {
+int bankAccount::getId() 
+{
     return this->accountNumber;
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <map>
 #include <mutex>
-#include "bankAccount.h"
+#include "BankAccount.h"
 
 class Bank
 {

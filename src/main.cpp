@@ -5,7 +5,7 @@
 #include <mutex>
 
 #include "Bank.hpp"
-#include "bankAccount.h"
+#include "BankAccount.h"
 #include "Logger.hpp"
 
 std::mutex mtx, printMtx;
