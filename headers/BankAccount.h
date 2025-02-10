@@ -4,7 +4,7 @@
 #include <mutex>
 #include <atomic>
 
-class bankAccount {
+class BankAccount {
 private: 
     int balance; 
     int deposits = 0;
@@ -13,8 +13,8 @@ private:
 
     std::mutex balanceMtx;
 public: 
-    bankAccount(int balance, int accountNumber);
-    bankAccount(int accountNumber);
+    BankAccount(int balance, int accountNumber);
+    BankAccount(int accountNumber);
     void deposit(int amount);
     void withdraw(int amount);
     int getBalance();

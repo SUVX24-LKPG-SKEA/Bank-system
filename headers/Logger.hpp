@@ -18,7 +18,7 @@ private:
     Logger();
 public:
     static void logInfo(int accountId, time_t timestamp, double accountBalance, double difference);
-    static void logResults(const std::map<int, bankAccount*>& accounts);
+    static void logResults(const std::map<int, BankAccount*>& accounts);
     static Logger &getInstance();
 };
 

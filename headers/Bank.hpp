@@ -9,14 +9,14 @@
 class Bank
 {
 private:
-    // Ändrade från bankAccount till bankAccount* eftersom annars bygger inte programmet.
-    std::map <int, bankAccount*> account;
+    // Ändrade från BankAccount till BankAccount* eftersom annars bygger inte programmet.
+    std::map <int, BankAccount*> account;
     std::mutex mapMtx;
 public:
-    const std::map<int, bankAccount*> getAccounts() const noexcept;
+    const std::map<int, BankAccount*> getAccounts() const noexcept;
 
-    void addAccount(int id, bankAccount* info);
-    bankAccount* getAccount(int id);
+    void addAccount(int id, BankAccount* info);
+    BankAccount* getAccount(int id);
     ~Bank();
 };
 

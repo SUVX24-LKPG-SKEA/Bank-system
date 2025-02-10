@@ -4,7 +4,7 @@
 
 TEST_CASE("BankAccount class", "[bankaccount],[class]")
 {
-    bankAccount bankAccount(600, 1);
+    BankAccount bankAccount(600, 1);
 
     REQUIRE_THROWS(bankAccount.withdraw(-1));
     REQUIRE_THROWS(bankAccount.deposit(-1));
@@ -30,7 +30,7 @@ TEST_CASE("Bank class", "[bank],[class]")
 {
     Bank bank;
 
-    REQUIRE_NOTHROW(bank.addAccount(1, new bankAccount(50, 1000)));
+    REQUIRE_NOTHROW(bank.addAccount(1, new BankAccount(50, 1000)));
     
     REQUIRE_NOTHROW(bank.getAccount(1));
     REQUIRE_THROWS(bank.getAccount(-1));
