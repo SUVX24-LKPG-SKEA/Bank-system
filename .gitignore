@@ -27,3 +27,4 @@ Thumbs.db
 build/
 run
 tests
+transaction_log.txt
