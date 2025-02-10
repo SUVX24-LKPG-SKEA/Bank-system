@@ -16,23 +16,23 @@ std::mutex mtx, printMtx;
  * @param clientid The id of the client
  * @param iterations The number of operations to perform
  */
+
 void client(Bank& bank, const int clientid, const int iterations)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution accountDist(1000, 1004);
-    std::uniform_int_distribution amountDist(10, 100);
-    std::uniform_int_distribution actionDist(1, 3);
+    std::uniform_int_distribution<int> accountDist(1000, 1004);
+    std::uniform_int_distribution<int> amountDist(10, 100);
+    std::uniform_int_distribution<int> actionDist(1, 3);
 
-
-    Logger &logger = Logger::getInstance(); // Accessing the "Logger" instance
+    Logger& logger = Logger::getInstance(); // Accessing the "Logger" instance
 
     // random transactions
     for (int i = 0; i < iterations; i++)
     {
         const int accountNumber = accountDist(gen);
-        const int amount  = amountDist(gen);
-        const int action  = actionDist(gen);
+        const int amount = amountDist(gen);
+        const int action = actionDist(gen);
 
         BankAccount *account;
 
@@ -41,40 +41,46 @@ void client(Bank& bank, const int clientid, const int iterations)
             account = bank.getAccount(accountNumber);
         }
 
-        time_t timestamp = std::time(nullptr); // Generate timestamp 
+        time_t timestamp = std::time(nullptr); // Generate timestamp
 
         {
             std::lock_guard<std::mutex> lock(printMtx);
             switch (action)
             {
             case 1:
-                
-                std::cout << "Customer" << clientid << " Account " << accountNumber
-                            << " Deposit: " << amount << std::endl;
-                try {
+                try
+                {
+                    std::cout << "Customer" << clientid << " Account " << accountNumber
+                        << " Deposit: " << amount << "\n";
                     account->deposit(amount);
 
                     logger.logInfo(account->getId(), timestamp, account->getBalance(), amount); // Log for depositing
-
-                } catch (const std::exception& e) {
-                    std::cerr << "Error: " << e.what() << std::endl;
+                }
+                catch (const std::exception& e)
+                {
+                    std::cerr << "Error: " << e.what() << "\n";
                 }
                 break;
             case 2:
-                std::cout << "Customer" << clientid << " Account " << accountNumber
-                            << " Withdraw: " << amount << std::endl;
-                try {
+                try
+                {
+                    std::cout << "Customer" << clientid << " Account " << accountNumber
+                        << " Withdraw: " << amount << "\n";;
+
                     account->withdraw(amount);
 
                     logger.logInfo(account->getId(), timestamp, account->getBalance(), -amount); // Log for withdrawing
-
-                } catch (const std::exception& e) {
-                    std::cerr << "Error: " << e.what() << std::endl;
+                }
+                catch (const std::exception& e)
+                {
+                    std::cerr << "Error: " << e.what() << "\n";
                 }
                 break;
             case 3:
                 std::cout << "Customer" << clientid << " Account " << accountNumber
-                            << " Balance: " << account->getBalance() << std::endl;
+                    << " Balance: " << account->getBalance() << "\n";
+                break;
+            default:
                 break;
             }
         }
@@ -106,7 +112,7 @@ int main()
         t.join();
     }
 
-    Logger &logger = Logger::getInstance();
+    Logger& logger = Logger::getInstance();
 
     logger.logResults(bank.getAccounts());
 
