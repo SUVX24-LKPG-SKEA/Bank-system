@@ -6,6 +6,10 @@
 #include <mutex>
 #include "BankAccount.h"
 
+/**
+ * @brief Class for the bank, consisting of accounts and a mutex
+ * 
+ */
 class Bank
 {
 private:

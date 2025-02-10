@@ -4,6 +4,10 @@
 #include <mutex>
 #include <atomic>
 
+/**
+ * @brief Class for bank accounts
+ * 
+ */
 class BankAccount {
 private: 
     int balance; 
