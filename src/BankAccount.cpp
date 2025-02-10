@@ -23,7 +23,7 @@ void BankAccount::deposit(int amount)
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     if(amount <= 0)
     {
-        throw "Invalid amount";
+        throw std::invalid_argument("Invalid amount");
     }
     deposits += amount;
     balance += amount;
@@ -38,11 +38,11 @@ void BankAccount::withdraw(int amount)
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     if (amount > balance)
     {
-        throw "Insufficient funds";
+        throw std::runtime_error("Insufficient funds");
     }
     else if(amount <= 0)
     {
-        throw "Invalid amount";
+        throw std::invalid_argument("Invalid amount");
     }
 
     withdraws += amount;
@@ -55,19 +55,19 @@ int BankAccount::getBalance()
     return balance;
 }
 
-int BankAccount::getWithdraws() 
+int BankAccount::getWithdraws()
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return withdraws;
 }
 
-int BankAccount::getDeposits() 
+int BankAccount::getDeposits()
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return deposits;
 }
 
-int BankAccount::getId() 
+int BankAccount::getId()
 {
     return this->accountNumber;
 }
