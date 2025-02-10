@@ -5,7 +5,7 @@
 #include <mutex>
 
 #include "Bank.hpp"
-#include "bankAccount.h"
+#include "BankAccount.h"
 #include "Logger.hpp"
 
 std::mutex mtx, printMtx;
@@ -34,7 +34,7 @@ void client(Bank& bank, const int clientid, const int iterations)
         const int amount = amountDist(gen);
         const int action = actionDist(gen);
 
-        bankAccount* account;
+        BankAccount *account;
 
         {
             std::lock_guard<std::mutex> lock(mtx);
@@ -96,7 +96,7 @@ int main()
     // Create 5 accounts
     for (int i = 1000; i < 1005; ++i)
     {
-        bank.addAccount(i, new bankAccount(1000, i));
+        bank.addAccount(i, new BankAccount(1000, i));
     }
 
     std::vector<std::thread> threads;

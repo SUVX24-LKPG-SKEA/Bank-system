@@ -1,7 +1,9 @@
 #include "Logger.hpp"
 #include <iostream>
 
-Logger::Logger() {
+Logger::Logger() 
+{
+
 }
 
 /**
@@ -11,7 +13,8 @@ Logger::Logger() {
  * @param accountBalance The balance of the account.
  * @param difference The transaction size, negative numbers indicates withdrawals.
  */
-void Logger::logInfo(int accountId, time_t timestamp, double accountBalance, double difference) {
+void Logger::logInfo(int accountId, time_t timestamp, double accountBalance, double difference) 
+{
     std::ofstream file("transaction_log.txt", std::ios::app);
 
     if (file.is_open()) {
@@ -25,7 +28,8 @@ void Logger::logInfo(int accountId, time_t timestamp, double accountBalance, dou
  * 
  * @param accounts A map to all accounts to be printed.
  */
-void Logger::logResults(const std::map<int, bankAccount*>& accounts) {
+void Logger::logResults(const std::map<int, BankAccount*>& accounts) 
+{
     std::cout << "\n--- Transaction report ---\n";
     for (auto [key, value] : accounts) {
         std::cout << "\nAccount " << key << 
@@ -35,7 +39,8 @@ void Logger::logResults(const std::map<int, bankAccount*>& accounts) {
     }
 }
 
-Logger &Logger::getInstance() {
+Logger &Logger::getInstance() 
+{
     static Logger instance;
     return instance;
 }

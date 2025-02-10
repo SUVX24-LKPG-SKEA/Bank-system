@@ -1,14 +1,14 @@
-#include "bankAccount.h"
+#include "BankAccount.h"
 #include <iostream>
 
-bankAccount::bankAccount(int balance, int accountNumber)
+BankAccount::BankAccount(int balance, int accountNumber)
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     this->balance = balance;
     this->accountNumber = accountNumber;
 }
 
-bankAccount::bankAccount(int accountNumber)
+BankAccount::BankAccount(int accountNumber)
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     this->balance = 0;
@@ -18,7 +18,7 @@ bankAccount::bankAccount(int accountNumber)
 /**
  * @throws When amount is negative or zero
  */
-void bankAccount::deposit(int amount)
+void BankAccount::deposit(int amount)
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     if(amount <= 0)
@@ -33,7 +33,7 @@ void bankAccount::deposit(int amount)
 /**
  * @throws When amount is negative or zero
  */
-void bankAccount::withdraw(int amount)
+void BankAccount::withdraw(int amount)
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     if (amount > balance)
@@ -49,22 +49,25 @@ void bankAccount::withdraw(int amount)
     balance -= amount;
 }
 
-int bankAccount::getBalance()
+int BankAccount::getBalance()
 {
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return balance;
 }
 
-int bankAccount::getWithdraws() {
+int BankAccount::getWithdraws() 
+{
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return withdraws;
 }
 
-int bankAccount::getDeposits() {
+int BankAccount::getDeposits() 
+{
     std::lock_guard<std::mutex> lock(this->balanceMtx);
     return deposits;
 }
 
-int bankAccount::getId() {
+int BankAccount::getId() 
+{
     return this->accountNumber;
 }
