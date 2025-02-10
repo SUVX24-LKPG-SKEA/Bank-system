@@ -13,11 +13,11 @@ std::mutex mtx, printMtx;
 /**
  * Randomizes deposits and withdrawals and generates random account numbers to perform operations on.
  * @param bank The bank object
- * @param clientid The id of the client
+ * @param clientId The id of the client
  * @param iterations The number of operations to perform
  */
 
-void client(Bank& bank, const int clientid, const int iterations)
+void client(Bank& bank, const int clientId, const int iterations)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -50,7 +50,7 @@ void client(Bank& bank, const int clientid, const int iterations)
             case 1:
                 try
                 {
-                    std::cout << "Customer" << clientid << " Account " << accountNumber
+                    std::cout << "Customer" << clientId << " Account " << accountNumber
                         << " Deposit: " << amount << "\n";
                     account->deposit(amount);
 
@@ -64,7 +64,7 @@ void client(Bank& bank, const int clientid, const int iterations)
             case 2:
                 try
                 {
-                    std::cout << "Customer" << clientid << " Account " << accountNumber
+                    std::cout << "Customer" << clientId << " Account " << accountNumber
                         << " Withdraw: " << amount << "\n";;
 
                     account->withdraw(amount);
@@ -77,7 +77,7 @@ void client(Bank& bank, const int clientid, const int iterations)
                 }
                 break;
             case 3:
-                std::cout << "Customer" << clientid << " Account " << accountNumber
+                std::cout << "Customer" << clientId << " Account " << accountNumber
                     << " Balance: " << account->getBalance() << "\n";
                 break;
             default:
