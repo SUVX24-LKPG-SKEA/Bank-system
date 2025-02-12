@@ -30,7 +30,7 @@ void Logger::logInfo(const int accountId, const time_t timestamp, const double a
 void Logger::logResults(const std::map<int, BankAccount*>& accounts)
 {
     std::cout << "\n--- Transaction report ---\n";
-    for (auto [key, value] : accounts)
+    for (const auto& [key, value] : accounts)
     {
         std::cout << "\nAccount " << key <<
             "\n\tBalance: " << value->getBalance() <<
