@@ -40,4 +40,4 @@ else ()
 endif()
 
 add_subdirectory(src)
-add_subdirectory(test)s
+add_subdirectory(test)
