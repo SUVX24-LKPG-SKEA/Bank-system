@@ -6,8 +6,6 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-unset( CMAKE_OSX_SYSROOT  )
-
 find_package(Catch2 QUIET)
 if(NOT Catch2_FOUND)
     find_package(Git QUIET)
